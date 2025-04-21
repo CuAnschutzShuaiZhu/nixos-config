@@ -1,0 +1,42 @@
+{ config, pkgs, ... }:
+let
+  rPkgs = import ./r-packages.nix { inherit pkgs; };
+in
+{
+  # username and home directory
+  home.username = "shuai";
+  home.homeDirectory = "/home/shuai";
+
+  home.packages = with pkgs;[
+    git
+    gh
+    neofetch
+    btop  # replacement of htop/nmon
+    lsof # list open files
+    python313 
+    tmux 
+		(rWrapper.override {packages = rPkgs;})
+    (rstudioWrapper.override {packages = rPkgs;})
+    
+  ];
+
+  # git 
+  programs.git = {
+    enable = true;
+    userName = "CuAnschutzShuaiZhu";
+    userEmail = "shuai.zhu@cuanschutz.edu";
+  };
+
+  # This value determines the Home Manager release that your
+  # configuration is compatible with. This helps avoid breakage
+  # when a new Home Manager release introduces backwards
+  # incompatible changes.
+  #
+  # You can update Home Manager without changing this value. See
+  # the Home Manager release notes for a list of state version
+  # changes in each release.
+  home.stateVersion = "24.11";
+
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+}
