@@ -9,12 +9,13 @@ in
 
   home.packages = with pkgs;[
     git
-    gh
-    neofetch
+    neofetch # display system information
     btop  # replacement of htop/nmon
     lsof # list open files
     python313 
-    tmux 
+    tmux # terminal multiplexer
+    dust # Disk Usage/Free Utility
+    tldr
 		(rWrapper.override {packages = rPkgs;})
     (rstudioWrapper.override {packages = rPkgs;})
     
