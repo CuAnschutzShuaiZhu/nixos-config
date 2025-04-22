@@ -3,11 +3,11 @@
 
 # Rebuild system using flake
 rebuild:
-    sudo nixos-rebuild switch --flake .#
+    sudo nixos-rebuild switch 
 
 # Show what will be built (dry run)
 dry-run:
-    sudo nixos-rebuild switch --flake .# --dry-run
+    sudo nixos-rebuild dry-activate
 
 # Garbage collection (free up disk space)
 clean:
