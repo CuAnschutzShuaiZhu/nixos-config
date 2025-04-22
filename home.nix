@@ -18,7 +18,7 @@ in
     tldr
 		(rWrapper.override {packages = rPkgs;})
     (rstudioWrapper.override {packages = rPkgs;})
-    
+    just # Handy way to save and run project-specific commands
   ];
 
   # git 
