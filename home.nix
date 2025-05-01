@@ -20,6 +20,8 @@ in
     (rstudioWrapper.override {packages = rPkgs;})
     just # Handy way to save and run project-specific commands
     rustc cargo # rust env
+    gcc13 # gcc 13
+    gdb # GNU Debugger
   ];
 
   # git 
