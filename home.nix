@@ -12,10 +12,11 @@ in
     neofetch # display system information
     btop  # replacement of htop/nmon
     lsof # list open files
-    (python312.withPackages (python-pkgs: with python-pkgs; [pandas numpy requests openpyxl numpy plotly jupyterlab statsmodels scikitlearn]))
+    (python312.withPackages (python-pkgs: with python-pkgs; [pandas numpy requests openpyxl numpy plotly notebook statsmodels scikitlearn])) # python 3.12
+    uv # A command-line tool for creating and managing virtual environments
     tmux # terminal multiplexer
     dust # Disk Usage/Free Utility
-    tldr
+    tldr 
 		(rWrapper.override {packages = rPkgs;})
     (rstudioWrapper.override {packages = rPkgs;})
     # pythonPackages.pythonEnv
