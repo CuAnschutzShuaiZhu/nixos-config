@@ -12,16 +12,19 @@ in
     neofetch # display system information
     btop  # replacement of htop/nmon
     lsof # list open files
-    python313 
+    (python312.withPackages (python-pkgs: with python-pkgs; [pandas numpy requests openpyxl numpy plotly jupyterlab statsmodels scikitlearn]))
     tmux # terminal multiplexer
     dust # Disk Usage/Free Utility
     tldr
 		(rWrapper.override {packages = rPkgs;})
     (rstudioWrapper.override {packages = rPkgs;})
+    # pythonPackages.pythonEnv
     just # Handy way to save and run project-specific commands
     rustc cargo # rust env
     gcc13 # gcc 13
     gdb # GNU Debugger
+    rclone # Command line program to sync files and directories to and from major cloud storage
+    pandoc # universal markup converter
   ];
 
   # git 
