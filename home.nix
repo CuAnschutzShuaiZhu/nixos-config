@@ -12,7 +12,7 @@ in
     neofetch # display system information
     btop  # replacement of htop/nmon
     lsof # list open files
-    (python312.withPackages (python-pkgs: with python-pkgs; [pandas numpy requests openpyxl numpy plotly notebook statsmodels scikitlearn])) # python 3.12
+    #(python312.withPackages (python-pkgs: with python-pkgs; [pandas numpy requests openpyxl numpy plotly notebook statsmodels scikitlearn])) # python 3.12
     uv # A command-line tool for creating and managing virtual environments
     tmux # terminal multiplexer
     dust # Disk Usage/Free Utility
@@ -26,6 +26,7 @@ in
     gdb # GNU Debugger
     rclone # Command line program to sync files and directories to and from major cloud storage
     pandoc # universal markup converter
+    texliveTeTeX # TeX Live is a comprehensive TeX document production system
   ];
 
   # git 

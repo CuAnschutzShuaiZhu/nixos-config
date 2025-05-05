@@ -13,4 +13,7 @@ with pkgs.rPackages; [
   rjags
   coda
   bayesrules
+  kableExtra
+  flextable
+  rticles
 ]
