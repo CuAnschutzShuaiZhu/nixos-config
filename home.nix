@@ -53,6 +53,13 @@ in {
     history.ignoreAllDups = true;
     history.path = "$HOME/.zsh_history";
     history.ignorePatterns = ["rm *" "pkill *" "cp *"];
+    initExtra = ''
+      bindkey "^[[1;5C" forward-word
+      bindkey "^[[1;5D" backward-word
+      bindkey '5~' kill-word
+      
+
+    '';
   };
 
   programs.starship.enable = true;
