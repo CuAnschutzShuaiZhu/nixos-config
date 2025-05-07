@@ -57,13 +57,13 @@ in {
       bindkey "^[[1;5C" forward-word
       bindkey "^[[1;5D" backward-word
       bindkey '5~' kill-word
-      
-
     '';
   };
 
-  programs.starship.enable = true;
-
+  programs.starship = {
+    enable = true;
+    settings = pkgs.lib.importTOML ./starship.toml;
+  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
