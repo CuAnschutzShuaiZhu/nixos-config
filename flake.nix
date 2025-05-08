@@ -13,20 +13,48 @@
   outputs = inputs@{ nixpkgs, home-manager, ... }: {
     # use "nixos", or your hostname as the name of the configuration
     # it's a better practice than "default" shown in the video
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      # system = "x86_64-linux";
-      modules = [
-        ./configuration.nix
-        # inputs.home-manager.nixosModules.default
-        home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.shuai = import ./home.nix;
-            home-manager.extraSpecialArgs = inputs;
-          }
-      ];
+    nixosConfigurations= {
+      nixos = let
+        username = "shuai";
+        specialArgs = {inherit username;};
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
+          modules = [
+            ./configuration.nix
+            # inputs.home-manager.nixosModules.default
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.shuai = import ./home.nix;
+              home-manager.extraSpecialArgs = inputs;
+            }
+          ];
+        };
+      vultr = let
+        username = "shuai";
+        specialArgs = {inherit username;};
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
+
+          modules = [
+            ./hosts/vultr
+            ./users/${username}/nixos.nix
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.extraSpecialArgs = inputs // specialArgs;
+              home-manager.users.${username} = import ./users/${username}/home.nix;
+            }
+          ];
+        };
     };
   };
 }
