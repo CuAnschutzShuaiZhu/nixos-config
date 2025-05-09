@@ -7,7 +7,7 @@
 
   imports = [
     ../../home/core.nix
-    ./programs
+    ../../home/programs
   ];
 
   programs.git = {
