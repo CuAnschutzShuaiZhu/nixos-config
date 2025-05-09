@@ -2,7 +2,9 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  rPkgs = import ./r-packages.nix {inherit pkgs;};
+in {
   home.packages = with pkgs; [
     git
     neofetch # display system information
