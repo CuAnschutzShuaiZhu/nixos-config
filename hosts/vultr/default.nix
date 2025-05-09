@@ -1,17 +1,40 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# In ./hosts/vultr/default.nix
+{ config, pkgs, modulesPath, lib, specialArgs, ... }: # Make sure specialArgs is received
 
-{ config, pkgs, ... }:
-
+let
+  # Extract username from specialArgs passed by flake.nix
+  username = specialArgs.username;
+in
 {
-  imports =
-    [
-      ../../modules/system.nix
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-  networking.hostName = "vultr";  # Define your hostname.
-  networking.networkmanager.enable = true; # Enable NetworkManager
-  system.stateVersion = "24.11"; 
+  imports = [
+    # Standard import
+    "${modulesPath}/etc/host-id"
+
+    # Your hardware configuration
+    ./hardware-configuration.nix
+
+    # Explicitly import your system module and pass its required arguments
+    (import ../../modules/system.nix {
+      inherit pkgs lib username; # Pass pkgs, lib, and the extracted username
+      # Add any other arguments modules/system.nix might require
+    })
+
+    # REVIEW: If ./users/${username}/nixos.nix also exists and imports system.nix,
+    # or defines the user, you might have conflicts or double imports.
+    # Ensure system.nix is imported only once and correctly passes 'username'.
+    # If ./users/${username}/nixos.nix is just a wrapper, ensure it correctly
+    # imports ../../modules/system.nix and passes the necessary args.
+    # If unsure, temporarily remove ./users/${username}/nixos.nix from flake.nix's
+    # modules list for the vultr host to isolate the issue to the import here.
+  ];
+
+  # Add other host-specific configurations here
+  # Example: networking, services unique to this host, bootloader settings, etc.
+
+  # system.stateVersion must be set here or in an imported module
+  system.stateVersion = "24.11"; # Example, match your actual version
+
+  # hostname can be set here
+  # networking.hostName = "vultr"; # Example
+
 }
