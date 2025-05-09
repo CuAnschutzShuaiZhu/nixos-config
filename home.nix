@@ -29,7 +29,7 @@ in {
     gdb # GNU Debugger
     rclone # Command line program to sync files and directories to and from major cloud storage
     pandoc # universal markup converter
-    
+    bottom
   ];
 
   # git

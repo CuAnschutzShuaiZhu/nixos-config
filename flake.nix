@@ -16,7 +16,7 @@
     nixosConfigurations= {
       nixos = let
         username = "shuai";
-        specialArgs = {inherit username;};
+        specialArgs = {inherit inputs;};
       in
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
