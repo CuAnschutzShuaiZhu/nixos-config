@@ -33,7 +33,7 @@ in
 
   # system.stateVersion must be set here or in an imported module
   system.stateVersion = "24.11"; # Example, match your actual version
-
+  wsl.defaultUser = lib.mkForce "shuai"; 
   # hostname can be set here
   networking.hostName = "wsl"; # Example
 

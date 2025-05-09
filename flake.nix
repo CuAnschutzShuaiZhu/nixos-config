@@ -3,14 +3,14 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, nixos-wsl, ... }: {
     # use "nixos", or your hostname as the name of the configuration
     # it's a better practice than "default" shown in the video
     nixosConfigurations= {
@@ -45,8 +45,7 @@
             ./hosts/vultr
             ./users/${username}/nixos.nix
 
-            home-manager.nixosModules.home-manager
-            {
+            home-manager.nixosModules.home-manager{
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
@@ -62,11 +61,15 @@
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
           system = "x86_64-linux";
-
           modules = [
+            
             ./hosts/wsl
             ./users/${username}/nixos.nix
-
+            nixos-wsl.nixosModules.default
+            {
+              system.stateVersion = "24.11";
+              wsl.enable = true;
+            }
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
