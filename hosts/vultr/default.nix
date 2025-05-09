@@ -8,7 +8,7 @@ in
 {
   imports = [
     # Standard import
-    "${modulesPath}/etc/host-id"
+
 
     # Your hardware configuration
     ./hardware-configuration.nix
@@ -35,6 +35,6 @@ in
   system.stateVersion = "24.11"; # Example, match your actual version
 
   # hostname can be set here
-  # networking.hostName = "vultr"; # Example
+  networking.hostName = "vultr"; # Example
 
 }
