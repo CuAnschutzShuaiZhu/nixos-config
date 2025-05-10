@@ -16,7 +16,7 @@
     nixosConfigurations= {
       homeserver = let
         username = "shuai";
-        specialArgs = {inherit inputs;};
+        specialArgs = {inherit username;};
       in
         nixpkgs.lib.nixosSystem {
           inherit specialArgs;
@@ -30,28 +30,8 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = inputs;
+              home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./users/${username}/home.nix;
-            }
-          ];
-        };
-
-      nixos = let
-        username = "shuai";
-        specialArgs = {inherit inputs;};
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit specialArgs;
-          system = "x86_64-linux";
-          modules = [
-            ./configuration.nix
-            # inputs.home-manager.nixosModules.default
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.shuai = import ./home.nix;
-              home-manager.extraSpecialArgs = inputs;
             }
           ];
         };
