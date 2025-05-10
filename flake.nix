@@ -14,6 +14,28 @@
     # use "nixos", or your hostname as the name of the configuration
     # it's a better practice than "default" shown in the video
     nixosConfigurations= {
+      homeserver = let
+        username = "shuai";
+        specialArgs = {inherit inputs;};
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/homeserver
+            ./users/${username}/nixos.nix
+            # ./users/${username}/home.nix
+            # inputs.home-manager.nixosModules.default
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = inputs;
+              home-manager.users.${username} = import ./users/${username}/home.nix;
+            }
+          ];
+        };
+
       nixos = let
         username = "shuai";
         specialArgs = {inherit inputs;};
