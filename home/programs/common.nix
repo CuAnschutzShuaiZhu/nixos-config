@@ -15,8 +15,6 @@ in {
     tmux # terminal multiplexer
     dust # Disk Usage/Free Utility
     tldr
-    (rWrapper.override {packages = rPkgs;})
-    (rstudioWrapper.override {packages = rPkgs;})
     # pythonPackages.pythonEnv
     just # Handy way to save and run project-specific commands
     rustc
