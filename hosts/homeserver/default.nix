@@ -18,8 +18,7 @@ in
       inherit pkgs lib username; # Pass pkgs, lib, and the extracted username
       # Add any other arguments modules/system.nix might require
     })
-
-    ../../home/r/default.nix
+    ../../modules/r-interface.nix
     # REVIEW: If ./users/${username}/nixos.nix also exists and imports system.nix,
     # or defines the user, you might have conflicts or double imports.
     # Ensure system.nix is imported only once and correctly passes 'username'.

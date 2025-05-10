@@ -1,7 +1,0 @@
-{
-  imports = [
-
-    ./r-interface.nix
-
-  ];
-}
