@@ -20,7 +20,7 @@
   rticles
 ];
 in {
-  home.packages = with pkgs; [
+  environment.systemPackages = with pkgs; [
 
     (rWrapper.override {packages = rPkgs;})
     (rstudioWrapper.override {packages = rPkgs;})
