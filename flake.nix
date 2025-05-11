@@ -11,8 +11,7 @@
   };
 
   outputs = inputs@{ nixpkgs, home-manager, nixos-wsl, ... }: {
-    # use "nixos", or your hostname as the name of the configuration
-    # it's a better practice than "default" shown in the video
+
     nixosConfigurations= {
       homeserver = let
         username = "shuai";
@@ -34,6 +33,7 @@
             }
           ];
         };
+
       vultr = let
         username = "shuai";
         specialArgs = {inherit username;};
@@ -49,7 +49,6 @@
             home-manager.nixosModules.home-manager{
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-
               home-manager.extraSpecialArgs = inputs // specialArgs;
               home-manager.users.${username} = import ./users/${username}/home.nix;
             }

@@ -30,7 +30,7 @@ in
 
   # Add other host-specific configurations here
   # Example: networking, services unique to this host, bootloader settings, etc.
-
+  services.openssh.enable = true;
   # system.stateVersion must be set here or in an imported module
   system.stateVersion = "24.11"; # Example, match your actual version
 
